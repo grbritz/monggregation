@@ -1,0 +1,14 @@
+extends layout
+
+block js
+  script(src='/js/mvp_1.js')
+
+block content
+  h1 Enter a query
+  
+  textarea(id="query-pane", name="query")
+  button(class="submit", id="query-submit")
+  hr
+  p 
+    strong Query results
+  p#query-output
