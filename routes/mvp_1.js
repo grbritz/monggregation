@@ -1,3 +1,4 @@
+var _ = require("underscore-node");
 var express = require('express');
 var router = express.Router();
 var DB = require('mongodb').Db,
@@ -53,7 +54,13 @@ router.post('/getSchema', function(req, res) {
     var collection = db.collection(collName);
 
     collection.findOne(function(err, doc) {
-      res.send(doc);
+      var schema = {};
+      Object.keys(doc).forEach(function(key) {
+        schema[key] = typeof(doc[key]);
+      });
+
+
+      res.send(schema);
       db.close();
     });
   });

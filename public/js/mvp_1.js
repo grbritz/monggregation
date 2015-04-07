@@ -13,6 +13,7 @@ $(document).ready(function(){
       {collection: collectionName, database: databaseName}, 
       function(data) {
         console.log(data);
+        $(".schema").text(JSON.stringify(data));
       }
     );
 
