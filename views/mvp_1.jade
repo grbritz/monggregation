@@ -14,18 +14,21 @@ block content
           span=database.size
           button(class="get-collections", id=database.name) Get collections
           ul(class="collections " + database.name, data-database-name=database.name)
-    div.aggregation-div
+    div.aggregation-div.hide
       .col-md-4
         h2 Collection Schema
         pre.schema
       .col-md-4
         h2 Enter your query
         textarea(id="query-pane", name="query")
-        button(class="submit", id="query-submit")
+        br
+        button(class="submit", id="query-submit") Go!
         hr
-        p 
-          strong Query results
-        p#query-output
+        .query-results-container.hide
+          h4 Query Results
+          pre.query-results
+
+
 
 
 

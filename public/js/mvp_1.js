@@ -6,6 +6,13 @@ $(document).ready(function(){
   var selectCollectionClickHandler = function() {
     var collectionName = $(this).data("collection-name");
     var databaseName = $(this).closest("ul").data('database-name');
+    $(".schema").text("");
+    $(".aggregation-div")
+      .removeClass("hide")
+      .data("database", databaseName)
+      .data("collection", collectionName);
+
+
     console.log(databaseName);
     console.log(collectionName);
 
@@ -18,6 +25,25 @@ $(document).ready(function(){
     );
 
   };
+
+  var querySubmitHandler = function() {
+    var collectionName = $(this).closest(".aggregation-div").data("collection");
+    var databaseName = $(this).closest(".aggregation-div").data("database");
+    var query = $("#query-pane").val();
+
+    $.post("mvp-1/runQuery", 
+      {
+        database: databaseName,
+        collection: collectionName,
+        query: query
+      }, function(result) {
+        console.log(result);
+        $(".query-results-container").removeClass("hide");
+        $(".query-results").text(JSON.stringify(result));
+      });
+  };
+
+  $("#query-submit").click(querySubmitHandler);
 
   $(".get-collections").click(function(){
     var databaseName = $(this).attr("id");

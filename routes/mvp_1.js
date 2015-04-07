@@ -18,9 +18,7 @@ router.get('/', function(req, res) {
     var adminDb = db.admin();
     // List all the available databases
     adminDb.listDatabases(function(err, dbs) {
-      console.log(dbs.databases);
       db.close();
-
       res.render('mvp_1', {databases: dbs.databases});
     });
   });
@@ -35,11 +33,7 @@ router.post('/getCollections', function(req, res) {
       var collectionNames = collections.map(function(obj, ind) {
         return obj.s.name;
       });
-
-      console.log(collectionNames);
-
       res.send(collectionNames);
-
       db.close();
     });
   });
@@ -59,11 +53,31 @@ router.post('/getSchema', function(req, res) {
         schema[key] = typeof(doc[key]);
       });
 
-
       res.send(schema);
       db.close();
     });
   });
+});
+
+router.post("/runQuery", function(req, res) {
+  var dbName = req.body.database;
+  var collName = req.body.collection;
+  var query = JSON.parse(req.body.query);
+
+  console.log(dbName);
+  console.log(query[0]);
+  var db = new DB(dbName, DBServer);
+  db.open(function(err, db) {
+    var collection = db.collection(collName);
+    console.log("databse opend");
+    collection.aggregate(query, function(err, docs) {
+      console.log("aggregate");
+      console.log(docs);
+      res.send(docs);
+      db.close();
+    });
+  });  
+
 });
 
 router.post('/', function(req, res) {
