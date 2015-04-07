@@ -19,6 +19,6 @@ block content
       strong=database.name
       span=database.size
       button(class="get-collections", id=database.name) Get collections
-      ul(class="collections " + database.name)
+      ul(class="collections " + database.name, data-database-name=database.name)
 
 

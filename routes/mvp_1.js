@@ -27,8 +27,8 @@ router.get('/', function(req, res) {
 
 
 router.post('/getCollections', function(req, res) {
-  var databaseName = req.query.database;
-  var db = new DB(databaseName, new Server('localhost', 27017));
+  var databaseName = req.body.database;
+  var db = new DB(databaseName, DBServer);
   db.open(function(err, db) {
     db.collections(function(err, collections) {
       var collectionNames = collections.map(function(obj, ind) {
@@ -39,6 +39,21 @@ router.post('/getCollections', function(req, res) {
 
       res.send(collectionNames);
 
+      db.close();
+    });
+  });
+});
+
+router.post('/getSchema', function(req, res) {
+  var dbName = req.body.database;
+  var collName = req.body.collection;
+  var db = new DB(dbName, DBServer);
+
+  db.open(function(err, db) {
+    var collection = db.collection(collName);
+
+    collection.findOne(function(err, doc) {
+      res.send(doc);
       db.close();
     });
   });
