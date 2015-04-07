@@ -6,6 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongojs = require('mongojs');
 
+
 // var routes = require('./routes/index');
 var mvp_1 = require('./routes/mvp_1');
 
@@ -34,7 +35,6 @@ app.use('/mvp-1', mvp_1);
 app.get('/', function(req, res) {
   res.render('index', { title: 'Monggregation' });
 });
-
 
 /// catch 404 and forward to error handler
 app.use(function(req, res, next) {

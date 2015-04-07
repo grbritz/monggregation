@@ -4,11 +4,21 @@ block js
   script(src='/js/mvp_1.js')
 
 block content
-  h1 Enter a query
+  //- h1 Enter a query
   
-  textarea(id="query-pane", name="query")
-  button(class="submit", id="query-submit")
-  hr
-  p 
-    strong Query results
-  p#query-output
+  //- textarea(id="query-pane", name="query")
+  //- button(class="submit", id="query-submit")
+  //- hr
+  //- p 
+  //-   strong Query results
+  //- p#query-output
+  
+  h1 Databases
+  for database in databases
+    p 
+      strong=database.name
+      span=database.size
+      button(class="get-collections", id=database.name) Get collections
+      ul(class="collections " + database.name)
+
+
