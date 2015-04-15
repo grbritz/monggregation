@@ -22,3 +22,4 @@ or
 ```
 npm run start
 ```
+3. In a browser, navigate to localhost:3000
