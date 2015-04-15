@@ -22,4 +22,4 @@ or
 ```
 npm run start
 ```
-3. In a browser, navigate to localhost:3000
+3. In a browser, navigate to localhost:3000/mnp-1
