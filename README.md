@@ -12,3 +12,5 @@ sudo npm install
 ```
 
 ## Instructions
+
+1. Connect mongdod on port 27017.
