@@ -14,3 +14,11 @@ sudo npm install
 ## Instructions
 
 1. Connect mongdod on port 27017.
+2. In the monggregation directory:
+```
+node bin/www
+```
+or
+```
+npm run start
+```
