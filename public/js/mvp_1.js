@@ -11,10 +11,7 @@ $(document).ready(function(){
       .removeClass("hide")
       .data("database", databaseName)
       .data("collection", collectionName);
-
-
-    console.log(databaseName);
-    console.log(collectionName);
+    $(".schema-name").text(collectionName);
 
     $.post("mvp-1/getSchema", 
       {collection: collectionName, database: databaseName}, 
