@@ -19,7 +19,7 @@ router.get('/', function(req, res) {
     // List all the available databases
     adminDb.listDatabases(function(err, dbs) {
       db.close();
-      res.render('mvp_1', {databases: dbs.databases});
+      res.render('index', {databases: dbs.databases});
     });
   });
 });
