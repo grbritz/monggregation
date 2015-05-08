@@ -12,8 +12,13 @@ block content
       ul(class="database-list list-unstyled", "data-bind"="foreach: databases")
         li.database
           strong(class="name",  "data-bind"="text: name")
-          button(class="get-collections", "data-bind"="attr: {id: name}") Get collections
-          //- ul(class="collections " + database.name, data-database-name=database.name)
+          br
+          span("data-bind"="ifnot: showCollections")
+            a("data-bind"="click: toggleShowCollections", href="#") Show collections
+          span("data-bind"="if: showCollections")
+            a("data-bind"="click: toggleShowCollections", href="#") Hide collections
+            ul("data-bind"="attr: {class: 'collections'}, foreach: collections")
+              li("data-bind"="text: name")
     
     div.aggregation-div.hide
       .col-md-4
