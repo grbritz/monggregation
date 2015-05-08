@@ -2,19 +2,19 @@ extends layout
 
 append js
   script(src='/components/ace-min-noconflict/ace.js')
-  script(src='/js/mvp_1.js')
+  script(src='/js/main.js')
 
 block content
   //- h1 Enter a query
   div.row
-    div.database-selector.col-md-4
+    div(class="database-selector col-md-4", "data-bind"="with: databaseMenu")
       h2 Databases
-      for database in databases
-        div 
-          strong=database.name
-          span=database.size
-          button(class="get-collections", id=database.name) Get collections
-          ul(class="collections " + database.name, data-database-name=database.name)
+      ul(class="database-list list-unstyled", "data-bind"="foreach: databases")
+        li.database
+          strong(class="name",  "data-bind"="text: name")
+          button(class="get-collections", "data-bind"="attr: {id: name}") Get collections
+          //- ul(class="collections " + database.name, data-database-name=database.name)
+    
     div.aggregation-div.hide
       .col-md-4
         h2.schema-name

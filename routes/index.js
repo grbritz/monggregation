@@ -11,7 +11,12 @@ var mongojs = require('mongojs');
 
 
 router.get('/', function(req, res) {
+  res.render('index');
   
+});
+
+// List Databases
+router.post('/api/databases/', function(req, res) {
   var db = new DB('test', DBServer);
   db.open(function(err, db) {
     // Use the admin database for the operation
@@ -19,7 +24,7 @@ router.get('/', function(req, res) {
     // List all the available databases
     adminDb.listDatabases(function(err, dbs) {
       db.close();
-      res.render('index', {databases: dbs.databases});
+      res.send(JSON.stringify(dbs));
     });
   });
 });
