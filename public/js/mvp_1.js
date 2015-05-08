@@ -17,7 +17,7 @@ $(document).ready(function(){
       {collection: collectionName, database: databaseName}, 
       function(data) {
         console.log(data);
-        $(".schema").text(JSON.stringify(data));
+        $(".schema").text(JSON.stringify(data, null, 2));
       }
     );
 
@@ -36,7 +36,7 @@ $(document).ready(function(){
       }, function(result) {
         console.log(result);
         $(".query-results-container").removeClass("hide");
-        $(".query-results").text(JSON.stringify(result));
+        $(".query-results").text(JSON.stringify(result, null, 2));
       });
   };
 
