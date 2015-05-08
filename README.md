@@ -1,6 +1,6 @@
 ## Monggregation
 
-Monggregtation is a MongoDB aggregation visualization tool.
+Monggregation is a MongoDB aggregation visualization tool.
 
 ## Installation
 

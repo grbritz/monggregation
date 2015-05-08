@@ -7,8 +7,7 @@ var bodyParser = require('body-parser');
 var mongojs = require('mongojs');
 
 
-// var routes = require('./routes/index');
-var mvp_1 = require('./routes/mvp_1');
+var routes = require('./routes/index');
 
 
 var app = express();
@@ -31,10 +30,7 @@ app.use(bodyParser.urlencoded({
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/mvp-1', mvp_1);
-app.get('/', function(req, res) {
-  res.render('index', { title: 'Monggregation' });
-});
+app.use('/', routes);
 
 /// catch 404 and forward to error handler
 app.use(function(req, res, next) {
