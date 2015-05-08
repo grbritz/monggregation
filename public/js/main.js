@@ -2,7 +2,50 @@ function MainViewModel() {
   var self = this;
     
   self.databaseMenu = new DatabaseMenu();
-  
+  self.activeCollection = ko.observable(false);
+
+  self.showCollection = function(database, collection) {
+    self.activeCollection(false);
+
+    $.post('/api/getSchema',  
+      {collection: collection.name, database: database.name}, 
+      function(schema) {
+        if (!schema) {
+          console.error("Could not get schema for " + database.name + "." + collection.name);
+          return;
+        }
+
+        self.activeCollection(new CollectionViewModel({
+          name : collection.name,
+          databaseName : database.name,
+          schema : schema
+        }))
+      });
+  };
+
+  // self.hideCollection = function (argument) {
+  //   self.hasActiveCollection(false);
+  // };
+}
+
+
+function CollectionViewModel(config) {
+  var self = this;
+  self.name = ko.observable("");
+  self.databaseName = ko.observable("");
+  self.schema = ko.observable(null);
+
+  self.prettySchema = ko.computed(function() {
+    return JSON.stringify(self.schema(), null, 2);
+  });
+
+  self.updateConfig = function (config) {
+    self.name(config.name);
+    self.databaseName(config.databaseName);
+    self.schema(config.schema);
+  };
+
+  self.updateConfig(config);
 }
 
 function DatabaseMenu () {
@@ -48,8 +91,7 @@ function DatabaseMenuItem(config) {
   };
 
   self.fetchCollections = function () {
-    console.log("fecthingColleftions")
-    $.post("/getCollections", {database: self.name}, function(data) {
+    $.post("/api/getCollections", {database: self.name}, function(data) {
       if (!data) {
         console.error("Fetch collections for " + self.name + " failed");
         return;
@@ -69,7 +111,6 @@ function DatabaseMenuItem(config) {
 
   self.updateConfig(config);
 }
-
 
 $(document).ready(function() {
   ko.applyBindings(new MainViewModel());

@@ -7,7 +7,7 @@ append js
 block content
   //- h1 Enter a query
   div.row
-    div(class="database-selector col-md-4", "data-bind"="with: databaseMenu")
+    div(class="database-selector col-md-2", "data-bind"="with: databaseMenu")
       h2 Databases
       ul(class="database-list list-unstyled", "data-bind"="foreach: databases")
         li.database
@@ -18,25 +18,27 @@ block content
           span("data-bind"="if: showCollections")
             a("data-bind"="click: toggleShowCollections", href="#") Hide collections
             ul("data-bind"="attr: {class: 'collections'}, foreach: collections")
-              li("data-bind"="text: name")
+              li("data-bind"="text: name, click: $root.showCollection.bind($root, $parent)")
     
-    div.aggregation-div.hide
-      .col-md-4
-        h2.schema-name
-        pre.schema
-      .col-md-4
-        h2 Enter your query
-        textarea(id="query-pane", name="query")
-        br
-        button(class="submit", id="query-submit") Go!
-        hr
-        .query-results-container.hide
-          h4 Query Results
-          pre.query-results
+    
+    div(class="col-md-10", "data-bind"="if: activeCollection")
+      div(class="aggregation-div row", "data-bind"="with: activeCollection")
+        .col-md-6
+          h2("data-bind"="text: name")
+          pre("data-bind"="text: prettySchema")
+        .col-md-6
 
 
-
-
-
-
-
+    //- div.aggregation-div.hide
+    //-   .col-md-4
+    //-     h2.schema-name
+    //-     pre.schema
+    //-   .col-md-4
+    //-     h2 Enter your query
+    //-     textarea(id="query-pane", name="query")
+    //-     br
+    //-     button(class="submit", id="query-submit") Go!
+    //-     hr
+    //-     .query-results-container.hide
+    //-       h4 Query Results
+    //-       pre.query-results

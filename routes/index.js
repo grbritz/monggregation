@@ -30,7 +30,7 @@ router.post('/api/databases/', function(req, res) {
 });
 
 
-router.post('/getCollections', function(req, res) {
+router.post('/api/getCollections', function(req, res) {
   var databaseName = req.body.database;
   var db = new DB(databaseName, DBServer);
   db.open(function(err, db) {
@@ -44,7 +44,7 @@ router.post('/getCollections', function(req, res) {
   });
 });
 
-router.post('/getSchema', function(req, res) {
+router.post('/api/getSchema', function(req, res) {
   var dbName = req.body.database;
   var collName = req.body.collection;
   var db = new DB(dbName, DBServer);
