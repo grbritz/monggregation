@@ -23,9 +23,9 @@ function MainViewModel() {
       });
   };
 
-  // self.hideCollection = function (argument) {
-  //   self.hasActiveCollection(false);
-  // };
+  self.hideCollection = function (argument) {
+    self.activeCollection(false);
+  };
 }
 
 

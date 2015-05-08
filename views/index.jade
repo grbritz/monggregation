@@ -5,20 +5,19 @@ append js
   script(src='/js/main.js')
 
 block content
-  //- h1 Enter a query
   div.row
     div(class="database-selector col-md-2", "data-bind"="with: databaseMenu")
       h2 Databases
       ul(class="database-list list-unstyled", "data-bind"="foreach: databases")
         li.database
           strong(class="name",  "data-bind"="text: name")
-          br
           span("data-bind"="ifnot: showCollections")
-            a("data-bind"="click: toggleShowCollections", href="#") Show collections
+            button(class="btn btn-default btn-xs","data-bind"="click: toggleShowCollections", href="#") +
           span("data-bind"="if: showCollections")
-            a("data-bind"="click: toggleShowCollections", href="#") Hide collections
-            ul("data-bind"="attr: {class: 'collections'}, foreach: collections")
-              li("data-bind"="text: name, click: $root.showCollection.bind($root, $parent)")
+            button(class="btn btn-default btn-xs", "data-bind"="click: toggleShowCollections", href="#") -
+            ul(class="collections list-unstyled", "data-bind"="foreach: collections")
+              li
+                a(href="#", "data-bind"="text: name, click: $root.showCollection.bind($root, $parent)")
     
     
     div(class="col-md-10", "data-bind"="if: activeCollection")
