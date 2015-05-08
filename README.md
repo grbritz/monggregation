@@ -1,6 +1,6 @@
 ## Monggregation
 
-Monggregtation is a MongoDB aggregation visualization tool.
+Monggregation is a MongoDB aggregation visualization tool.
 
 ## Installation
 
@@ -13,7 +13,7 @@ npm install && bower install
 
 ## Instructions
 
-1. Connect mongdod on port 27017.
+1. Connect mongdo on port 27017.
 2. In the monggregation directory: 
   ```
   node bin/www
