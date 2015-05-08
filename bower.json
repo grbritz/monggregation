@@ -10,6 +10,7 @@
     "bootstrap": "~3.3.4",
     "jquery": "~2.1.4",
     "knockout": "~3.3.0",
-    "ace-min-noconflict": "~1.1.9"
+    "ace-min-noconflict": "~1.1.9",
+    "codemirror": "~5.2.0"
   }
 }

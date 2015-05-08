@@ -27,7 +27,6 @@ $(document).ready(function(){
     var collectionName = $(this).closest(".aggregation-div").data("collection");
     var databaseName = $(this).closest(".aggregation-div").data("database");
     var query = $("#query-pane").val();
-
     $.post("/runQuery", 
       {
         database: databaseName,
@@ -60,7 +59,10 @@ $(document).ready(function(){
     });
   });
 
+  var myCodeMirror = CodeMirror(document.body, {
+    value: "write query here...\n",
+    mode:  "javascript"
+  });
   
-
 
 });
