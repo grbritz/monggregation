@@ -8,7 +8,7 @@ Install Node.js and npm.
 
 In the monggregation directory:
 ```
-sudo npm install
+npm install && bower install
 ```
 
 ## Instructions
