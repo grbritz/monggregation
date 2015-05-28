@@ -22,10 +22,21 @@ block content
     
     div(class="col-md-10", "data-bind"="if: activeCollection")
       div(class="aggregation-div row", "data-bind"="with: activeCollection")
-        .col-md-6
-          h2("data-bind"="text: name")
-          pre("data-bind"="text: prettySchema")
-        .col-md-6
+        .col-md-4
+          .row
+            h3("data-bind"="text: 'Collection: ' + name")
+            pre("data-bind"="text: prettySchema")
+          .row
+            h2 Create Aggregation Query
+            p("data-bind"="text: aggregationPrefix")
+            textarea(class="query-pane", "data-bind"="textInput: queryString")
+            p("data-bind"="text: aggregationSuffix")
+            button(class="submit btn btn-default", "data-bind"="click: runQuery") Run
+        div("data-bind"="if: queryResult")
+          .col-md-8
+            pre("data-bind"="text: queryResult")
+
+
 
 
     //- div.aggregation-div.hide

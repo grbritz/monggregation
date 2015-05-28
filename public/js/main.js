@@ -31,18 +31,39 @@ function MainViewModel() {
 
 function CollectionViewModel(config) {
   var self = this;
-  self.name = ko.observable("");
-  self.databaseName = ko.observable("");
-  self.schema = ko.observable(null);
+  self.name = "";
+  self.databaseName = "";
+  self.schema = ko.observable(null);  
+  self.queryString = ko.observable("");
+  self.queryStringFull = ko.computed(function () {
+    return self.aggregationPrefix + self.queryString() + self.aggregationSuffix;
+  });
+  // self.existsQueryResults = ko.observable(false);
+  self.queryResult = ko.observable(null);
 
   self.prettySchema = ko.computed(function() {
     return JSON.stringify(self.schema(), null, 2);
   });
 
   self.updateConfig = function (config) {
-    self.name(config.name);
-    self.databaseName(config.databaseName);
+    self.name = config.name;
+    self.databaseName = config.databaseName;
     self.schema(config.schema);
+    self.aggregationPrefix = "db." + self.name + ".aggregate([";
+    self.aggregationSuffix = "]);";
+  };
+
+  self.runQuery = function () {
+    self.queryResult(false);
+    $.post('/api/runQuery/',
+      {
+        database : self.databaseName,
+        collection : self.name,
+        query : "[" + self.queryString() +"]"
+      }, function(result) {
+        console.log('Query Result: ', result);
+        self.queryResult(JSON.stringify(result, null, 2));
+      });
   };
 
   self.updateConfig(config);

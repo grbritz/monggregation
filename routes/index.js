@@ -64,7 +64,7 @@ router.post('/api/getSchema', function(req, res) {
   });
 });
 
-router.post("/runQuery", function(req, res) {
+router.post("/api/runQuery", function(req, res) {
   var dbName = req.body.database;
   var collName = req.body.collection;
   var query = JSON.parse(req.body.query);
@@ -74,10 +74,7 @@ router.post("/runQuery", function(req, res) {
   var db = new DB(dbName, DBServer);
   db.open(function(err, db) {
     var collection = db.collection(collName);
-    console.log("databse opend");
     collection.aggregate(query, function(err, docs) {
-      console.log("aggregate");
-      console.log(docs);
       res.send(docs);
       db.close();
     });

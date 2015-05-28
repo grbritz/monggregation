@@ -22,4 +22,4 @@ npm install && bower install
   ```
   npm run start
   ```
-3. In a browser, navigate to localhost:3000/mvp-1
+3. In a browser, navigate to localhost:3000
